@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "codurance-kata-interview", "codurance-kata-interview\codurance-kata-interview.csproj", "{F9BA69CF-B31E-44B0-BE75-F6DC484575DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "codurance-kata-interview.Test", "codurance-kata-interview.Test\codurance-kata-interview.Test.csproj", "{BBE87E54-7DDD-49B8-B61C-53486ACCA118}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F9BA69CF-B31E-44B0-BE75-F6DC484575DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9BA69CF-B31E-44B0-BE75-F6DC484575DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9BA69CF-B31E-44B0-BE75-F6DC484575DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9BA69CF-B31E-44B0-BE75-F6DC484575DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBE87E54-7DDD-49B8-B61C-53486ACCA118}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBE87E54-7DDD-49B8-B61C-53486ACCA118}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBE87E54-7DDD-49B8-B61C-53486ACCA118}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBE87E54-7DDD-49B8-B61C-53486ACCA118}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
