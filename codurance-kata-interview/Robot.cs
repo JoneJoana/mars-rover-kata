@@ -4,13 +4,15 @@
     {
         public int x;
         public int y;
-        public Directions Direction; 
+        public Directions Direction;
+        public Plateau plateau;
 
-        public Robot() 
+        public Robot(Plateau _plateau) 
         { 
             x = 0;
             y = 0;
             Direction = Directions.N;
+            plateau = _plateau;
         }
 
         public string Execute(string command)
@@ -32,17 +34,33 @@
                 if (Direction == Directions.N)
                 {
                     y++;
+                    if (y == plateau.y)
+                    {
+                        y = 0;
+                    }                    
                 }
                 if (Direction == Directions.W)
-                {
+                {                    
+                    if (x == 0)
+                    {
+                        x = plateau.x;
+                    }
                     x--;
                 }
                 if (Direction == Directions.E)
                 {
                     x++;
+                    if (x == plateau.x)
+                    {
+                        x = 0;
+                    }
                 }
                 if (Direction == Directions.S)
                 {
+                    if (y == 0)
+                    {
+                        y = plateau.y;
+                    }
                     y--;
                 }
             }
@@ -54,7 +72,7 @@
             {
                 rotateRight();
             }
-            else
+            if (command == 'L')
             {
                 rotateLeft();
             }

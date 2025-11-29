@@ -1,13 +1,19 @@
 namespace codurance_kata_interview.Test;
 
-public class ProgramTests
+public class RobotTests
 {
+    Plateau plateau;
+    public RobotTests() 
+    {
+        plateau = new Plateau();
+    } 
+
     [Fact]
     public void RobotShouldExecuteCommandReceivedAndReturnCurrentPosition()
     {
         //given
         var expectedPosition = "0:0:N";
-        Robot robot = new Robot();
+        Robot robot = new Robot(plateau);
 
         //when
         var command = "";
@@ -25,7 +31,7 @@ public class ProgramTests
     public void RobotShouldRotateWhenReceivingDirectionLeft(string command, string expectedFinalPosition)
     {
         //given
-        Robot robot = new Robot();
+        Robot robot = new Robot(plateau);
 
         //when        
         var position = robot.Execute(command);
@@ -42,7 +48,7 @@ public class ProgramTests
     public void RobotShouldRotateWhenReceivingDirectionRight(string command, string expectedFinalPosition)
     {
         //given
-        Robot robot = new Robot();
+        Robot robot = new Robot(plateau);
 
         //when
         var position = robot.Execute(command);
@@ -58,7 +64,7 @@ public class ProgramTests
     public void RobotShouldMoveWhenReceivingMoveCommand(string command, string expectedFinalPosition)
     {
         //given
-        Robot robot = new Robot();
+        Robot robot = new Robot(plateau);
 
         //when
         var position = robot.Execute(command);
@@ -68,14 +74,14 @@ public class ProgramTests
     }
 
     [Theory]
-    [InlineData("LM", "-1:0:W")]
-    [InlineData("LML", "-1:0:S")]
+    [InlineData("LM", "9:0:W")]
+    [InlineData("LML", "9:0:S")]
     [InlineData("MRMLLM", "0:1:W")]
     [InlineData("MMRMMLM ", "2:3:N")]
-    public void RobotShouldMoveWhenReceivingDirectionAndMoveCommandsAndReturnFinalPosition(string command, string expectedFinalPosition)
+    public void RobotShouldMoveWhenReceivingDirectionAndMoveCommands(string command, string expectedFinalPosition)
     {
         //given
-        Robot robot = new Robot();
+        Robot robot = new Robot(plateau);
 
         //when
         var position = robot.Execute(command);
@@ -86,13 +92,13 @@ public class ProgramTests
 
 
     [Theory]
-    [InlineData("LM", "LM", "-1:-1:S")]
-    [InlineData("LM", "LMM", "-1:-2:S")]
-    [InlineData("RM", "RMMR", "1:-2:W")]
-    [InlineData("RMM", "RM", "2:-1:S")]
-    public void RobotShouldSaveItsStateAfterEachExecuteAndReturnFinalPosition(string command1, string command2, string expectedFinalPosition)
+    [InlineData("LM", "LM", "9:9:S")]
+    [InlineData("LM", "LMM", "9:8:S")]
+    [InlineData("RM", "RMMR", "1:8:W")]
+    [InlineData("RMM", "RM", "2:9:S")]
+    public void RobotShouldSaveItsStateAfterEachExecute(string command1, string command2, string expectedFinalPosition)
     {        
-        Robot robot = new Robot();
+        Robot robot = new Robot(plateau);
 
         //when
         _ = robot.Execute(command1);
@@ -100,6 +106,23 @@ public class ProgramTests
 
         //then
         Assert.Equal(expectedFinalPosition, finalPosition);
+    }
+
+    [Theory]
+    [InlineData("MMMMMMMMMMMM", "0:2:N")]
+    [InlineData("RMMMMMMMMMMMM", "2:0:E")]
+    [InlineData("LMM", "8:0:W")]
+    [InlineData("RRMM", "0:8:S")]
+    public void RobotShouldWrapAroundnWhenReachedPlateauLimit(string command, string expectedFinalPosition)
+    {
+        //given
+        Robot robot = new Robot(plateau);
+
+        //when
+        var position = robot.Execute(command);
+
+        //then
+        Assert.Equal(expectedFinalPosition, position);
     }
 
 }
