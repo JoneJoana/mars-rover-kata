@@ -11,13 +11,13 @@ namespace codurance_kata_interview
     {
         public int x;
         public int y;
-        public string direction; 
+        public string Direction; 
 
         public Robot() 
         { 
             x = 0;
             y = 0;
-            direction = "N";
+            Direction = "N";
         }
 
         public string Execute(string command)
@@ -31,36 +31,34 @@ namespace codurance_kata_interview
 
             if (command.Contains("L"))
             {                
-                direction = "W";
+                Direction = "W";
             }
 
             if (command.Contains("R"))
             {
-                direction = "E";
+                Direction = "E";
             }
 
             if (command.Contains("M"))
             {
-                if(direction == "N")
+                if(Direction == "N")
                 {
                     y++;
                 }
-                if(direction == "W")
+                if(Direction == "W")
                 {
                     x--;
                 }
-                if(direction == "E")
+                if(Direction == "E")
                 {
                     x++;
                 }
-                if(direction == "S")
+                if(Direction == "S")
                 {
                     y--;
                 }                    
             }
-
-
-            return "0:0:N";
+            return $"{x}:{y}:{Direction}";
         }
     }  
     
