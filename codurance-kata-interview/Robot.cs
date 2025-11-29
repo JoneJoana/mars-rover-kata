@@ -31,7 +31,7 @@ namespace codurance_kata_interview
                     coordinates = moveService.Move(coordinates, Direction);
                 }                
             }            
-            return $"{coordinates.x}:{coordinates.y}:{Direction}";
+            return $"{coordinates.X}:{coordinates.Y}:{Direction}";
         }
     }
 }

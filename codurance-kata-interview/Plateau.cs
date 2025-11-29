@@ -2,7 +2,7 @@
 {
     public class Plateau(int x, int y)
     {
-        public int x = x;
-        public int y = y;
+        public int X { get; set; } = x;
+        public int Y { get; set; } = y;
     }
 }

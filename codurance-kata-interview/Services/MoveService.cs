@@ -32,37 +32,37 @@
 
         private void MoveSouth(Coordinates coordinates)
         {
-            if (coordinates.y == 0)
+            if (coordinates.Y == 0)
             {
-                coordinates.y = plateau.y;
+                coordinates.Y = plateau.Y;
             }
-            coordinates.y--;
+            coordinates.Y--;
         }
 
         private void MoveEast(Coordinates coordinates)
         {
-            coordinates.x++;
-            if (coordinates.x == plateau.x)
+            coordinates.X++;
+            if (coordinates.X == plateau.X)
             {
-                coordinates.x = 0;
+                coordinates.X = 0;
             }
         }
 
         private void MoveWest(Coordinates coordinates)
         {
-            if (coordinates.x == 0)
+            if (coordinates.X == 0)
             {
-                coordinates.x = plateau.x;
+                coordinates.X = plateau.X;
             }
-            coordinates.x--;
+            coordinates.X--;
         }
 
         private void MoveNorth(Coordinates coordinates)
         {
-            coordinates.y++;
-            if (coordinates.y == plateau.y)
+            coordinates.Y++;
+            if (coordinates.Y == plateau.Y)
             {
-                coordinates.y = 0;
+                coordinates.Y = 0;
             }
         }
     }
