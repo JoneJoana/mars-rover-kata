@@ -12,38 +12,58 @@
         {            
             if (direction == Direction.N)
             {
-                coordinates.y++;
-                if (coordinates.y == plateau.y)
-                {
-                    coordinates.y = 0;
-                }
+                MoveNorth(coordinates);
             }
             if (direction == Direction.W)
             {
-                if (coordinates.x == 0)
-                {
-                    coordinates.x = plateau.x;
-                }
-                coordinates.x--;
+                MoveWest(coordinates);
             }
             if (direction == Direction.E)
             {
-                coordinates.x++;
-                if (coordinates.x == plateau.x)
-                {
-                    coordinates.x = 0;
-                }
+                MoveEast(coordinates);
             }
             if (direction == Direction.S)
             {
-                if (coordinates.y == 0)
-                {
-                    coordinates.y = plateau.y;
-                }
-                coordinates.y--;
+                MoveSouth(coordinates);
             }
 
             return coordinates;
+        }
+
+        private void MoveSouth(Coordinates coordinates)
+        {
+            if (coordinates.y == 0)
+            {
+                coordinates.y = plateau.y;
+            }
+            coordinates.y--;
+        }
+
+        private void MoveEast(Coordinates coordinates)
+        {
+            coordinates.x++;
+            if (coordinates.x == plateau.x)
+            {
+                coordinates.x = 0;
+            }
+        }
+
+        private void MoveWest(Coordinates coordinates)
+        {
+            if (coordinates.x == 0)
+            {
+                coordinates.x = plateau.x;
+            }
+            coordinates.x--;
+        }
+
+        private void MoveNorth(Coordinates coordinates)
+        {
+            coordinates.y++;
+            if (coordinates.y == plateau.y)
+            {
+                coordinates.y = 0;
+            }
         }
     }
 }
