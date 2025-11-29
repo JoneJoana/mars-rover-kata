@@ -21,64 +21,64 @@
 
             foreach (var order in commands)
             {
-                rotate(order);
-                move(order);
+                Rotate(order);
+                Move(order);
             }            
             return $"{x}:{y}:{Direction}";
         }
 
-        private void move(char command)
+        private void Move(char command)
         {
-            if (command == 'M')
+            if (command != 'M')
+                return;
+
+            if (Direction == Directions.N)
             {
-                if (Direction == Directions.N)
+                y++;
+                if (y == plateau.y)
                 {
-                    y++;
-                    if (y == plateau.y)
-                    {
-                        y = 0;
-                    }                    
+                    y = 0;
                 }
-                if (Direction == Directions.W)
-                {                    
-                    if (x == 0)
-                    {
-                        x = plateau.x;
-                    }
-                    x--;
-                }
-                if (Direction == Directions.E)
+            }
+            if (Direction == Directions.W)
+            {
+                if (x == 0)
                 {
-                    x++;
-                    if (x == plateau.x)
-                    {
-                        x = 0;
-                    }
+                    x = plateau.x;
                 }
-                if (Direction == Directions.S)
+                x--;
+            }
+            if (Direction == Directions.E)
+            {
+                x++;
+                if (x == plateau.x)
                 {
-                    if (y == 0)
-                    {
-                        y = plateau.y;
-                    }
-                    y--;
+                    x = 0;
                 }
+            }
+            if (Direction == Directions.S)
+            {
+                if (y == 0)
+                {
+                    y = plateau.y;
+                }
+                y--;
             }
         }
 
-        private void rotate(char command)
+        private void Rotate(char command)
         {
             if (command == 'R')
             {
-                rotateRight();
+                RotateRight();
             }
             if (command == 'L')
             {
-                rotateLeft();
+                RotateLeft();
             }
         }
 
-        private void rotateRight()
+        private void RotateRight()
         {
             if (Direction == Directions.N)
             {
@@ -98,7 +98,7 @@
             }
         }
 
-        private void rotateLeft()
+        private void RotateLeft()
         {
             if (Direction == Directions.N)
             {
