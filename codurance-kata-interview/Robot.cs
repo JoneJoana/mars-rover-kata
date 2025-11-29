@@ -1,94 +1,108 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.Marshalling;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace codurance_kata_interview
-{    
+﻿namespace codurance_kata_interview
+{
     public class Robot
     {
         public int x;
         public int y;
-        public string Direction; 
+        public Directions Direction; 
 
         public Robot() 
         { 
             x = 0;
             y = 0;
-            Direction = "N";
+            Direction = Directions.N;
         }
 
         public string Execute(string command)
         {
-            var commands = command.ToArray();     
+            var commands = command.ToArray();
 
             foreach (var order in commands)
             {
-                
-            }
+                rotateLeft(order);
+                rotateRight(order);
+                move(order);
+            }            
+            return $"{x}:{y}:{Direction}";
+        }
 
-            if (command.Contains("L"))
+        private void move(char command)
+        {
+            if (command == 'M')
             {
-                if(Direction == "N")
-                {
-                    Direction = "W";
-                }
-                else if (Direction == "W")
-                {
-                    Direction = "S";
-                }
-                else if (Direction == "S")
-                {
-                    Direction = "E";
-                }
-                else if (Direction == "E")
-                {
-                    Direction = "N";
-                }
-            }
-
-            if (command.Contains("R"))
-            {
-                if (Direction == "N")
-                {
-                    Direction = "E";
-                }
-                else if (Direction == "E")
-                {
-                    Direction = "S";
-                }
-                else if (Direction == "S")
-                {
-                    Direction = "W";
-                }
-                else if (Direction == "W")
-                {
-                    Direction = "N";
-                }
-            }
-
-            if (command.Contains("M"))
-            {
-                if(Direction == "N")
+                if (Direction == Directions.N)
                 {
                     y++;
                 }
-                if(Direction == "W")
+                if (Direction == Directions.W)
                 {
                     x--;
                 }
-                if(Direction == "E")
+                if (Direction == Directions.E)
                 {
                     x++;
                 }
-                if(Direction == "S")
+                if (Direction == Directions.S)
                 {
                     y--;
-                }                    
+                }
             }
-            return $"{x}:{y}:{Direction}";
+        }
+
+        private void rotateRight(char command)
+        {
+            if (command == 'R')
+            {
+                if (Direction == Directions.N)
+                {
+                    Direction = Directions.E;
+                }
+                else if (Direction == Directions.E)
+                {
+                    Direction = Directions.S;
+                }
+                else if (Direction == Directions.S)
+                {
+                    Direction = Directions.W;
+                }
+                else if (Direction == Directions.W)
+                {
+                    Direction = Directions.N;
+                }
+            }
+        }
+
+        private void rotateLeft(char command)
+        {
+            if (command == 'L')
+            {
+                if (Direction == Directions.N)
+                {
+                    Direction = Directions.W;
+                }
+                else if (Direction == Directions.W)
+                {
+                    Direction = Directions.S;
+                }
+                else if (Direction == Directions.S)
+                {
+                    Direction = Directions.E;
+                }
+                else if (Direction == Directions.E)
+                {
+                    Direction = Directions.N;
+                }
+            }
         }
     }
+
+    public enum Directions
+    {
+        N = 0,
+        E = 1,
+        S = 2,
+        W = 3
+    }
+
+
 }
