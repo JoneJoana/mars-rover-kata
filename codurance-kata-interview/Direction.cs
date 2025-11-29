@@ -1,6 +1,6 @@
 ﻿namespace codurance_kata_interview
 {
-    public enum Directions
+    public enum Direction
     {
         N,
         E,

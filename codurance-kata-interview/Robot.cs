@@ -1,18 +1,21 @@
-﻿namespace codurance_kata_interview
+﻿using codurance_kata_interview.Services;
+
+namespace codurance_kata_interview
 {
     public class Robot
     {
-        public int x;
-        public int y;
-        public Directions Direction;
-        public Plateau plateau;
+        public Coordinates coordinates { get; set; }
+        public Direction Direction;        
 
-        public Robot(Plateau _plateau) 
+        public IMoveService moveService;
+        public IRotateService rotateService;
+
+        public Robot(IMoveService _moveService, IRotateService _rotateService) 
         { 
-            x = 0;
-            y = 0;
-            Direction = Directions.N;
-            plateau = _plateau;
+            coordinates = new(0,0);
+            Direction = Direction.N;
+            moveService = _moveService;
+            rotateService = _rotateService;
         }
 
         public string Execute(string command)
@@ -21,102 +24,14 @@
 
             foreach (var order in commands)
             {
-                Rotate(order);
-                Move(order);
+                Direction = rotateService.Rotate(order, Direction);
+
+                if(order == 'M')
+                {
+                    coordinates = moveService.Move(coordinates, Direction);
+                }                
             }            
-            return $"{x}:{y}:{Direction}";
-        }
-
-        private void Move(char command)
-        {
-            if (command != 'M')
-                return;
-
-            if (Direction == Directions.N)
-            {
-                y++;
-                if (y == plateau.y)
-                {
-                    y = 0;
-                }
-            }
-            if (Direction == Directions.W)
-            {
-                if (x == 0)
-                {
-                    x = plateau.x;
-                }
-                x--;
-            }
-            if (Direction == Directions.E)
-            {
-                x++;
-                if (x == plateau.x)
-                {
-                    x = 0;
-                }
-            }
-            if (Direction == Directions.S)
-            {
-                if (y == 0)
-                {
-                    y = plateau.y;
-                }
-                y--;
-            }
-        }
-
-        private void Rotate(char command)
-        {
-            if (command == 'R')
-            {
-                RotateRight();
-            }
-            if (command == 'L')
-            {
-                RotateLeft();
-            }
-        }
-
-        private void RotateRight()
-        {
-            if (Direction == Directions.N)
-            {
-                Direction = Directions.E;
-            }
-            else if (Direction == Directions.E)
-            {
-                Direction = Directions.S;
-            }
-            else if (Direction == Directions.S)
-            {
-                Direction = Directions.W;
-            }
-            else if (Direction == Directions.W)
-            {
-                Direction = Directions.N;
-            }
-        }
-
-        private void RotateLeft()
-        {
-            if (Direction == Directions.N)
-            {
-                Direction = Directions.W;
-            }
-            else if (Direction == Directions.W)
-            {
-                Direction = Directions.S;
-            }
-            else if (Direction == Directions.S)
-            {
-                Direction = Directions.E;
-            }
-            else if (Direction == Directions.E)
-            {
-                Direction = Directions.N;
-            }
+            return $"{coordinates.x}:{coordinates.y}:{Direction}";
         }
     }
-
 }

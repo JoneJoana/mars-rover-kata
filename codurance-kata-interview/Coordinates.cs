@@ -1,6 +1,6 @@
 ﻿namespace codurance_kata_interview
 {
-    public class Plateau(int x, int y)
+    public class Coordinates(int x, int y)
     {
         public int x = x;
         public int y = y;

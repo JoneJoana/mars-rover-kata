@@ -1,11 +1,18 @@
+using codurance_kata_interview.Services;
+
 namespace codurance_kata_interview.Test;
 
 public class RobotTests
 {
     Plateau plateau;
+    IMoveService moveService;
+    IRotateService rotateService;
+
     public RobotTests() 
     {
         plateau = new Plateau(10, 10);
+        moveService = new MoveService(plateau);
+        rotateService = new RotateService();
     } 
 
     [Fact]
@@ -13,7 +20,7 @@ public class RobotTests
     {
         //given
         var expectedPosition = "0:0:N";
-        Robot robot = new Robot(plateau);
+        Robot robot = new Robot(moveService, rotateService);
 
         //when
         var command = "";
@@ -31,7 +38,7 @@ public class RobotTests
     public void RobotShouldRotateWhenReceivingDirectionLeft(string command, string expectedFinalPosition)
     {
         //given
-        Robot robot = new Robot(plateau);
+        Robot robot = new Robot(moveService, rotateService);
 
         //when        
         var position = robot.Execute(command);
@@ -48,7 +55,7 @@ public class RobotTests
     public void RobotShouldRotateWhenReceivingDirectionRight(string command, string expectedFinalPosition)
     {
         //given
-        Robot robot = new Robot(plateau);
+        Robot robot = new Robot(moveService, rotateService);
 
         //when
         var position = robot.Execute(command);
@@ -64,7 +71,7 @@ public class RobotTests
     public void RobotShouldMoveWhenReceivingMoveCommand(string command, string expectedFinalPosition)
     {
         //given
-        Robot robot = new Robot(plateau);
+        Robot robot = new Robot(moveService, rotateService);
 
         //when
         var position = robot.Execute(command);
@@ -81,7 +88,7 @@ public class RobotTests
     public void RobotShouldMoveWhenReceivingDirectionAndMoveCommands(string command, string expectedFinalPosition)
     {
         //given
-        Robot robot = new Robot(plateau);
+        Robot robot = new Robot(moveService, rotateService);
 
         //when
         var position = robot.Execute(command);
@@ -97,8 +104,8 @@ public class RobotTests
     [InlineData("RM", "RMMR", "1:8:W")]
     [InlineData("RMM", "RM", "2:9:S")]
     public void RobotShouldSaveItsStateAfterEachExecute(string command1, string command2, string expectedFinalPosition)
-    {        
-        Robot robot = new Robot(plateau);
+    {
+        Robot robot = new Robot(moveService, rotateService);
 
         //when
         _ = robot.Execute(command1);
@@ -116,7 +123,7 @@ public class RobotTests
     public void RobotShouldWrapAroundnWhenReachedPlateauLimit(string command, string expectedFinalPosition)
     {
         //given
-        Robot robot = new Robot(plateau);
+        Robot robot = new Robot(moveService, rotateService);
 
         //when
         var position = robot.Execute(command);
