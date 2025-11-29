@@ -17,95 +17,89 @@ public class ProgramTests
         Assert.Equal(expectedPosition, position);
     }
 
-    [Fact]
-    public void RobotShouldRotateWhenReceivingDirectionLeft()
+    [Theory]
+    [InlineData("L", "0:0:W")]
+    [InlineData("LL", "0:0:S")]
+    [InlineData("LLL", "0:0:E")]
+    [InlineData("LLLL", "0:0:N")]
+    public void RobotShouldRotateWhenReceivingDirectionLeft(string command, string expectedFinalPosition)
     {
         //given
-        var expectedPosition = "0:0:W";
         Robot robot = new Robot();
 
-        //when
-        var command = "L";
+        //when        
         var position = robot.Execute(command);
 
         //then
-        Assert.Equal(expectedPosition, position);
+        Assert.Equal(expectedFinalPosition, position);
     }
 
-    [Fact]
-    public void RobotShouldRotateWhenReceivingDirectionRight()
+    [Theory]
+    [InlineData("R", "0:0:E")]
+    [InlineData("RR", "0:0:S")]
+    [InlineData("RRR", "0:0:W")]
+    [InlineData("RRRR", "0:0:N")]
+    public void RobotShouldRotateWhenReceivingDirectionRight(string command, string expectedFinalPosition)
     {
         //given
-        var expectedPosition = "0:0:E";
         Robot robot = new Robot();
 
         //when
-        var command = "R";
         var position = robot.Execute(command);
 
         //then
-        Assert.Equal(expectedPosition, position);
+        Assert.Equal(expectedFinalPosition, position);
     }
 
-    [Fact]
-    public void RobotShouldMoveWhenReceivingMoveCommand()
+    [Theory]
+    [InlineData("M", "0:1:N")]
+    [InlineData("MM", "0:2:N")]
+    [InlineData("MMM", "0:3:N")]
+    public void RobotShouldMoveWhenReceivingMoveCommand(string command, string expectedFinalPosition)
     {
         //given
-        var expectedPosition = "0:1:N";
         Robot robot = new Robot();
 
         //when
-        var command = "M";
         var position = robot.Execute(command);
 
         //then
-        Assert.Equal(expectedPosition, position);
+        Assert.Equal(expectedFinalPosition, position);
     }
 
-    [Fact]
-    public void RobotShouldMoveWestWhenReceivingLeftAndMoveCommand()
+    [Theory]
+    [InlineData("LM", "-1:0:W")]
+    [InlineData("LML", "-1:0:S")]
+    [InlineData("MRMLLM", "0:1:W")]
+    [InlineData("MMRMMLM ", "2:3:N")]
+    public void RobotShouldMoveWhenReceivingDirectionAndMoveCommandsAndReturnFinalPosition(string command, string expectedFinalPosition)
     {
         //given
-        var expectedPosition = "-1:0:W";
         Robot robot = new Robot();
 
         //when
-        var command = "LM";
         var position = robot.Execute(command);
 
         //then
-        Assert.Equal(expectedPosition, position);
+        Assert.Equal(expectedFinalPosition, position);
     }
 
-    [Fact]
-    public void RobotShouldSaveItsStateAfterEachExecuteWithOneDirectionLeftAndOneMovePerCommand()
-    {
-        var expectedFinalPosition = "-1:-1:S";
+
+    [Theory]
+    [InlineData("LM", "LM", "-1:-1:S")]
+    [InlineData("LM", "LMM", "-1:-2:S")]
+    [InlineData("RM", "RMMR", "1:-2:W")]
+    [InlineData("RMM", "RM", "2:-1:S")]
+    public void RobotShouldSaveItsStateAfterEachExecuteAndReturnFinalPosition(string command1, string command2, string expectedFinalPosition)
+    {        
         Robot robot = new Robot();
 
         //when
-        var command = "LM";
-        var position = robot.Execute(command);
-        var command2 = "LM";
+        _ = robot.Execute(command1);
         var finalPosition = robot.Execute(command2);
 
         //then
         Assert.Equal(expectedFinalPosition, finalPosition);
     }
 
-    [Fact]
-    public void RobotShouldSaveItsStateAfterEachExecuteWithOneDirectionRightAndOneMovePerCommand()
-    {
-        var expectedFinalPosition = "1:-1:S";
-        Robot robot = new Robot();
-
-        //when
-        var command = "RM";
-        var position = robot.Execute(command);
-        var command2 = "RM";
-        var finalPosition = robot.Execute(command2);
-
-        //then
-        Assert.Equal(expectedFinalPosition, finalPosition);
-    }
 }
