@@ -76,4 +76,36 @@ public class ProgramTests
         //then
         Assert.Equal(expectedPosition, position);
     }
+
+    [Fact]
+    public void RobotShouldSaveItsStateAfterEachExecuteWithOneDirectionLeftAndOneMovePerCommand()
+    {
+        var expectedFinalPosition = "-1:-1:S";
+        Robot robot = new Robot();
+
+        //when
+        var command = "LM";
+        var position = robot.Execute(command);
+        var command2 = "LM";
+        var finalPosition = robot.Execute(command2);
+
+        //then
+        Assert.Equal(expectedFinalPosition, finalPosition);
+    }
+
+    [Fact]
+    public void RobotShouldSaveItsStateAfterEachExecuteWithOneDirectionRightAndOneMovePerCommand()
+    {
+        var expectedFinalPosition = "1:-1:S";
+        Robot robot = new Robot();
+
+        //when
+        var command = "RM";
+        var position = robot.Execute(command);
+        var command2 = "RM";
+        var finalPosition = robot.Execute(command2);
+
+        //then
+        Assert.Equal(expectedFinalPosition, finalPosition);
+    }
 }

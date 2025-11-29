@@ -30,13 +30,43 @@ namespace codurance_kata_interview
             }
 
             if (command.Contains("L"))
-            {                
-                Direction = "W";
+            {
+                if(Direction == "N")
+                {
+                    Direction = "W";
+                }
+                else if (Direction == "W")
+                {
+                    Direction = "S";
+                }
+                else if (Direction == "S")
+                {
+                    Direction = "E";
+                }
+                else if (Direction == "E")
+                {
+                    Direction = "N";
+                }
             }
 
             if (command.Contains("R"))
             {
-                Direction = "E";
+                if (Direction == "N")
+                {
+                    Direction = "E";
+                }
+                else if (Direction == "E")
+                {
+                    Direction = "S";
+                }
+                else if (Direction == "S")
+                {
+                    Direction = "W";
+                }
+                else if (Direction == "W")
+                {
+                    Direction = "N";
+                }
             }
 
             if (command.Contains("M"))
@@ -60,6 +90,5 @@ namespace codurance_kata_interview
             }
             return $"{x}:{y}:{Direction}";
         }
-    }  
-    
+    }
 }
