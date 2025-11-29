@@ -19,8 +19,7 @@
 
             foreach (var order in commands)
             {
-                rotateLeft(order);
-                rotateRight(order);
+                rotate(order);
                 move(order);
             }            
             return $"{x}:{y}:{Direction}";
@@ -49,60 +48,57 @@
             }
         }
 
-        private void rotateRight(char command)
+        private void rotate(char command)
         {
             if (command == 'R')
             {
-                if (Direction == Directions.N)
-                {
-                    Direction = Directions.E;
-                }
-                else if (Direction == Directions.E)
-                {
-                    Direction = Directions.S;
-                }
-                else if (Direction == Directions.S)
-                {
-                    Direction = Directions.W;
-                }
-                else if (Direction == Directions.W)
-                {
-                    Direction = Directions.N;
-                }
+                rotateRight();
             }
-        }
-
-        private void rotateLeft(char command)
-        {
-            if (command == 'L')
+            else
             {
-                if (Direction == Directions.N)
-                {
-                    Direction = Directions.W;
-                }
-                else if (Direction == Directions.W)
-                {
-                    Direction = Directions.S;
-                }
-                else if (Direction == Directions.S)
-                {
-                    Direction = Directions.E;
-                }
-                else if (Direction == Directions.E)
-                {
-                    Direction = Directions.N;
-                }
+                rotateLeft();
+            }
+        }
+
+        private void rotateRight()
+        {
+            if (Direction == Directions.N)
+            {
+                Direction = Directions.E;
+            }
+            else if (Direction == Directions.E)
+            {
+                Direction = Directions.S;
+            }
+            else if (Direction == Directions.S)
+            {
+                Direction = Directions.W;
+            }
+            else if (Direction == Directions.W)
+            {
+                Direction = Directions.N;
+            }
+        }
+
+        private void rotateLeft()
+        {
+            if (Direction == Directions.N)
+            {
+                Direction = Directions.W;
+            }
+            else if (Direction == Directions.W)
+            {
+                Direction = Directions.S;
+            }
+            else if (Direction == Directions.S)
+            {
+                Direction = Directions.E;
+            }
+            else if (Direction == Directions.E)
+            {
+                Direction = Directions.N;
             }
         }
     }
-
-    public enum Directions
-    {
-        N = 0,
-        E = 1,
-        S = 2,
-        W = 3
-    }
-
 
 }
