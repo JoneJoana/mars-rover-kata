@@ -2,7 +2,13 @@
 {
     public class Plateau
     {
-        public int x = 10;
-        public int y = 10;
+        public int x;
+        public int y;
+
+        public Plateau(int x, int y) 
+        {
+            this.x = x;
+            this.y = y;
+        }
     }
 }

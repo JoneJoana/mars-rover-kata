@@ -5,7 +5,7 @@ public class RobotTests
     Plateau plateau;
     public RobotTests() 
     {
-        plateau = new Plateau();
+        plateau = new Plateau(10, 10);
     } 
 
     [Fact]
